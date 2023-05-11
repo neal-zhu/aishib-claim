@@ -14,11 +14,11 @@ addr = "0x21a2f6A0d2156bB069b3062e249072cec2dA9320"
 async function claim(signer) {
   while (true) {
     try {
-      const response = await axios.post(`https://rektarb.xyz/api/sinature?userAddress=${signer.address}`);
-      console.log(response.data, signer.address)
-      let { signature, nonce } = response.data
+      const response = await axios.post(`https://bruhcoin.co/api/sinature?userAddress=${signer.address}`);
+      console.log("ok", response.data, signer.address)
+      const { nonce, signature } = response.data
       const contract = new hre.ethers.Contract(addr, abi, signer)
-      let tx = await contract.claim(nonce, signature, "0x3dbb624861c0f62bde573a33640ca016e4c65ff7", { gasLimit: 2000000 })
+      let tx = await contract.claim(nonce, signature, "0x3dbb624861c0f62bde573a33640ca016e4c65ff7")
       await tx.wait()
       console.log(`%s claim %s`, signer.address, tx.hash)
       return
